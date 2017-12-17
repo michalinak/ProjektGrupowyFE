@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoginPage</title>
+    <link rel="stylesheet" type="text/css" href="logInStyle.css">
+</head>
+<body oncontextmenu="return false">
+<div class="header">
+    <p>RED<span>ot</span></p>
+</div>
+
+<div class="login">
+    <form>
+        <input type="email" placeholder="e-mail" name="email"></br>
+        <input type="password" placeholder="password" name="password"></br>
+        <input type="button" onclick="checkForm(this.form)" value="login">
+    </form>
+</div>
+<!--DEMO VERSION-->
+<script language="JavaScript">
+    function checkForm(form) {
+        if (form.email.value === "michalina94@yahoo.pl" && form.password.value === "qwerty") {
+            window.open("http://www.facebook.com");
+        }
+        else {
+            alert("email or password incorrect");
+        }s
+    }
+</script>
+</body>
+</html>
