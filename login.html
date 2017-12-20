@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>LoginPage</title>
-    <link rel="stylesheet" type="text/css" href="logInStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/logInStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
-<body oncontextmenu="return false">
+<body>
 <div class="header">
     <p>RED<span>ot</span></p>
 </div>
@@ -14,19 +16,9 @@
     <form>
         <input type="email" placeholder="e-mail" name="email"></br>
         <input type="password" placeholder="password" name="password"></br>
-        <input type="button" onclick="checkForm(this.form)" value="login">
+        <input type="button" id="login" value="login">
     </form>
 </div>
-<!--DEMO VERSION-->
-<script language="JavaScript">
-    function checkForm(form) {
-        if (form.email.value === "michalina94@yahoo.pl" && form.password.value === "qwerty") {
-            window.open("http://www.facebook.com");
-        }
-        else {
-            alert("email or password incorrect");
-        }s
-    }
-</script>
+<script type="text/javascript" src="js/loginScript.js"></script>
 </body>
 </html>
