@@ -8,7 +8,7 @@ body {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-image: url("logInBackground.jpg");
+    background-image: url("../drawable/logInBackground.jpg");
 }
 
 .header {
