@@ -4,30 +4,23 @@ var userProfiles;
 var userIndex = undefined;
 
 $('#login').bind('click', function () {
-    emailValue = $("[name='email']")[0].value;
-    passwordValue = $("[name='password']")[0].value;
+   // emailValue = $("[name='email']")[0].value;
+    //passwordValue = $("[name='password']")[0].value;
 
     $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/userProfiles",
-        dataType: "json",
-        async: false,
-        success: function (response) {
-            console.log("Connected");
-            var json = JSON.parse(JSON.stringify(response));
-            userProfiles = json._embedded.userProfiles;
-            checkCredentials(userProfiles);
+        type: 'post',
+        url: 'http://localhost:8080/login',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify( { username: $("[name='email']").val(), password: $("[name='password']").val()} ),
+        success: function( data, textStatus, jQxhr ){
+            console.log('sukces');
+        },
+        error: function( jqXhr, textStatus, errorThrown ){
+            console.log( errorThrown );
+            console.log('fail');
         }
     });
-});
 
-function checkCredentials(users) {
-    for (var i = 0; i < users.length; i++) {
-        if (emailValue === users[i].username && passwordValue === users[i].password) {
-            userIndex = i;
-            window.location = "file:///C:/Users/micha_000/Documents/ProjektGrupowy/ProjektGrupowyFE/mainPage.html#"; //sciezka do strony main
-            break;
-        }
-    }
-    if (userIndex === undefined) alert('incorrect e-mail address or password');
-}
+
+});

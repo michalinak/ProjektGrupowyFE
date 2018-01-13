@@ -1,5 +1,6 @@
 var childX;
 var childY;
+var childId = 1;
 var childSource = new ol.source.Vector();
 
 var currentPositionStyle = new ol.style.Style({
@@ -23,25 +24,28 @@ function init() {
         layers: [osmMap, childLayer],
         view: new ol.View({
             center: ol.proj.fromLonLat([parseFloat(childX), parseFloat(childY)]),
-            zoom: 15
+            zoom: 13
         })
     });
 
     openNav();
     closeNav();
+    setChildId();
 }
 
 function getCurrentPosition() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/coordinates",
+        url: "http://localhost:8080/coordinates/child/"+childId,
         dataType: "json",
         async: false,
         success: function (response) {
             console.log("Connected");
             var json = JSON.parse(JSON.stringify(response));
-            var coordinates = json._embedded.coordinates;
+            var coordinates = json;
             var coordinatesLength = coordinates.length;
+            //wyswietlanie ostatniej koordynaty
+            //console.log("ostatnie koordynaty: "+coordinates[coordinatesLength-1].width+" "+coordinates[coordinatesLength-1].length);
 
             childX = coordinates[coordinatesLength - 1].width; //szerokosc latitude
             childY = coordinates[coordinatesLength - 1].length; //dlugosc longitude
@@ -58,8 +62,8 @@ function getCurrentPosition() {
             childSource.addFeature(childFeature);
 
             var time = coordinates[coordinatesLength - 1].time;
-            $("p").text('Location time: ' + time);
-
+            var date = coordinates[coordinatesLength - 1].date;
+            $("p").text('Location time: ' + time +' date: '+ date);
         },
         error: function (e) {
             console.log("getCurrentPosition request error " + e);
@@ -74,4 +78,10 @@ function openNav() {
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+}
+function setChildId() {
+    $('#mySidenav').children('a').not('.closebtn').click(function () {
+        childId = this.id;
+        console.log(childId);
+    });
 }
